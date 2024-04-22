@@ -4,10 +4,39 @@
     <script src="app.js"></script>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <link rel="stylesheet" href="style.css">
-    <meta charset="dUTF-8">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Movie Tickets</title>
 </head>
 <body>
+<h1>Movie Tickets</h1>
+<form id="ticketForm">
+    <label for="selectMovie">Select a film</label>
+    <select id="selectMovie" autocomplete="off">
+        <option value="">Select</option>
+        <option value="The Shawshank Redemption">The Shawshank Redemption</option>
+        <option value="The Dark Knight">The Dark Knight</option>
+        <option value="Pulp Fiction">Pulp Fiction</option>
+        <option value="The Godfather">The Godfather</option>
+    </select>
+    <label for="ticketAmount">Number of tickets</label>
+    <input type="number" id="ticketAmount" autocomplete="off">
+    <label for="firstName">First name</label>
+    <input type="text" id="firstName" autocomplete="off">
+    <label for="lastName">Last name</label>
+    <input type="text" id="lastName" autocomplete="off">
+    <label for="phone">Phone</label>
+    <input type="text" id="phone" autocomplete="off">
+    <label for="email">Email</label>
+    <input type="text" id="email" autocomplete="off">
+    <button type="button" onclick="submitTickets()">Submit</button>
+</form>
 
+<div id="ticketConfirmationContainer">
+    <h3>Ticket Confirmation</h3>
+    <button type="button" onclick="">Show tickets</button>
+    <ul id="ticketConfirmation"></ul>
+    <button type="button" onclick="">Delete tickets</button>
+</div>
 </body>
 </html>
