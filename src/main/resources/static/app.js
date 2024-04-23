@@ -1,13 +1,45 @@
-function ticketOrder(){
-    const ticketDetails = {
-        movie : $("#selectMovie").val(),
-        number_of_tickets : $("#ticketAmount").val(),
-        first_name : $("#firstName").val(),
-        last_name : $("#lastName").val(),
-        phone_number : $("#phone").val(),
-        email : $("#email").val()
-    }
+let ticketDetails = null;
 
+function ticketValidation(){
+    let movie = $("#selectMovie").val();
+    let number_of_tickets =  $("#ticketAmount").val()
+    let first_name = $("#firstName").val()
+    let last_name = $("#lastName").val()
+    let phone_number = $("#phone").val()
+    let email = $("#email").val()
+
+    const validateTicketAmount = /^\b([0-9]|[1-9][0-9])\b/
+    const validateName = /^[a-zA-Z]/;
+    const validatePhone = /^[0-9]/
+    const validateEmail = /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/
+
+    if (movie === "") {
+        alert("Please select a movie!")
+    } else if (!validateTicketAmount.test(number_of_tickets) || number_of_tickets === "") {
+        alert("Please select a valid ticket amount!")
+    } else if (!validateName.test(first_name) || first_name === "") {
+        alert("Please enter your first name!")
+    } else if (!validateName.test(last_name) || last_name === "") {
+        alert("Please enter your last name!")
+    } else if (!validatePhone.test(phone_number) || phone_number === "") {
+        alert("Please enter a valid phone number!")
+    } else if (!validateEmail.test(email) || email === "") {
+        alert("Please enter a valid email address!")
+    } else {
+        ticketDetails = {
+            movie : movie,
+            number_of_tickets : number_of_tickets,
+            first_name : first_name,
+            last_name : last_name,
+            phone_number : phone_number,
+            email : email
+        }
+        ticketOrder()
+    }
+}
+
+
+function ticketOrder(){
     $.ajax({
         url : "/orderTickets",
         type : "POST",
@@ -15,12 +47,22 @@ function ticketOrder(){
         data : JSON.stringify(ticketDetails),
         success : function(response){
             console.log("Success", response);
+            $("#container").text("Success! See your ticket confirmation below");
+            $("#confirmationAlert").fadeIn();
         },
         error: function(xhr, status, error) {
             console.log("Error:", xhr.responseText);
+            $("#confirmationAlert").text("Failed to order ticket(s)!");
+            $("#confirmationAlert").fadeIn();
         }
     });
+
+    $("#closeAlert").click(function() {
+        $("#confirmationAlert").fadeOut();  // Hide the alert dialog
+    });
 }
+
+
 
 function ticketConfirmation(){
     $.ajax({
@@ -45,4 +87,22 @@ function ticketConfirmation(){
             console.log("Error fetching tickets", error);
         }
     });
+}
+
+function deleteTicket() {
+    let ticketID = $("#ticketID").val();
+    if (ticketID) {
+        $.ajax({
+            url: "/tickets/" + ticketID,
+            type: "DELETE",
+            success: function (result) {
+                alert("Ticket successfully deleted.");
+            },
+            error: function (xhr, status, error) {
+                alert("Failed to delete ticket : " + xhr.responseText);
+            }
+        });
+    } else {
+        alert("Please enter a valid ticket ID!");
+    }
 }

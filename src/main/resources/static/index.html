@@ -29,14 +29,23 @@
     <input type="text" id="phone" autocomplete="off">
     <label for="email">Email</label>
     <input type="text" id="email" autocomplete="off">
-    <button type="button" onclick="ticketOrder()">Submit</button>
+    <button type="button" onclick="ticketValidation()">Submit</button>
+    <div id="confirmationAlert">
+        <p>Success! See your ticket confirmation below</p>
+        <button type="button" id="closeAlert">Close</button>
+    </div>
 </form>
 
 <div id="ticketConfirmationContainer">
     <h3>Ticket Confirmation</h3>
     <button type="button" onclick="ticketConfirmation()">Show tickets</button>
     <ul id="ticketConfirmation"></ul>
-    <button type="button" onclick="">Delete tickets</button>
+</div>
+<div id="deleteTicket">
+    <h3>Delete Ticket</h3>
+    <label for="ticketID">Ticket ID</label>
+    <input type="text" id="ticketID">
+    <button type="submit" id="deleteButton" onclick="deleteTicket()">Delete ticket</button>
 </div>
 </body>
 </html>

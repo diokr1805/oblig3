@@ -2,10 +2,7 @@ package data1700.oblig3;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -26,4 +23,14 @@ public class MovieTicketsController {
         return TicketsRepository.findAll();
     }
 
+    @DeleteMapping("/tickets/{id}")
+    public ResponseEntity<MovieTickets> deleteTicket(@PathVariable Long id) {
+        try {
+            TicketsRepository.deleteById(id);
+            return ResponseEntity.ok().build(); // Successfully deleted
+        } catch (Exception e) {
+            e.printStackTrace();  // Log the actual error for more insight
+            return ResponseEntity.notFound().build(); // ID not found or error during deletion
+        }
+    }
 }

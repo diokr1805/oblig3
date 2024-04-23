@@ -73,6 +73,24 @@ button{
     font-family: Iosevka, sans-serif;
 }
 
+#confirmationAlert{
+    display: none;
+    width: 100%;
+    margin: 10px 50px 20px 25px;
+    background-color: #f8d7da;
+    color: #721c24;
+    border-radius: 5px;
+    border: 1px solid #f5c6cb;
+}
+
+#closeAlert{
+    margin-bottom: 10px;
+}
+
+p{
+    margin: 10px 0px  0px 25px;
+}
+
 /*———— TICKET CONFIRMATION ————*/
 
 h3{
@@ -93,3 +111,14 @@ ul{
 li{
     list-style: none;
 }
+
+/*———— DELETE TICKETS ————*/
+
+#deleteTicket{
+    padding-left: 25px;
+}
+
+#ticketID{
+    margin-bottom: 20px;
+}
+
