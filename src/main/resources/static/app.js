@@ -38,7 +38,6 @@ function ticketValidation(){
     }
 }
 
-
 function ticketOrder(){
     $.ajax({
         url : "/orderTickets",
@@ -46,6 +45,12 @@ function ticketOrder(){
         contentType : "application/json",
         data : JSON.stringify(ticketDetails),
         success : function(response){
+            $("#selectMovie").val("");
+            $("#ticketAmount").val("");
+            $("#firstName").val("");
+            $("#lastName").val("");
+            $("#phone").val("");
+            $("#email").val("");
             console.log("Success", response);
             $("#container").text("Success! See your ticket confirmation below");
             $("#confirmationAlert").fadeIn();
@@ -58,11 +63,9 @@ function ticketOrder(){
     });
 
     $("#closeAlert").click(function() {
-        $("#confirmationAlert").fadeOut();  // Hide the alert dialog
+        $("#confirmationAlert").fadeOut();
     });
 }
-
-
 
 function ticketConfirmation(){
     $.ajax({

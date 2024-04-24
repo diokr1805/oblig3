@@ -27,10 +27,10 @@ public class MovieTicketsController {
     public ResponseEntity<MovieTickets> deleteTicket(@PathVariable Long id) {
         try {
             TicketsRepository.deleteById(id);
-            return ResponseEntity.ok().build(); // Successfully deleted
+            return ResponseEntity.ok().build();
         } catch (Exception e) {
-            e.printStackTrace();  // Log the actual error for more insight
-            return ResponseEntity.notFound().build(); // ID not found or error during deletion
+            e.printStackTrace();
+            return ResponseEntity.notFound().build();
         }
     }
 }
